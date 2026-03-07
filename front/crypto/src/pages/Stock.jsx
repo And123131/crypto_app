@@ -93,7 +93,7 @@ function Stock() {
         <PillNav
           logo={logo}
           logoAlt="Company Logo"
-          items={[{ label: 'Home', href: '/' }]}
+          items={[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about-us' }]}
           className="custom-nav"
           ease="power2.easeOut"
           baseColor="#000000"
