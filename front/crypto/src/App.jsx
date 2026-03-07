@@ -3,6 +3,7 @@ import DarkVeil from "./components/DarkVeil"
 import GradientText from "./components/GradientText"
 import Home from "./pages/Home"
 import Stock from "./pages/Stock"
+import AboutUs from "./pages/AboutUs"
 import "./App.css"
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/stock" element={<Stock />} />
+            <Route path="/about-us" element={<AboutUs />} />
           </Routes>
         </div>
       </div>
