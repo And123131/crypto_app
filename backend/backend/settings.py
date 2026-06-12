@@ -10,17 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
+import shutil
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+_env_path = BASE_DIR / "api" / ".env"
+_env_example = BASE_DIR / "api" / ".env.example"
+
+if not _env_path.exists() and _env_example.exists():
+    shutil.copy(_env_example, _env_path)
+
+if _env_path.exists():
+    load_dotenv(_env_path)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7oe+niq+gox(ma2ki_2g)l&@^&ezucjtg=fhj1dz$*48dyx_ig'
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+if not SECRET_KEY:
+    raise ImproperlyConfigured(
+        "DJANGO_SECRET_KEY is not set. Copy backend/api/.env.example to "
+        "backend/api/.env and set a unique secret key."
+    )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
